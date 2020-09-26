@@ -12,28 +12,31 @@ import "./App.css";
 
 import type { GraphQLSchema } from "graphql";
 
+import data from './builtkite.json'
+
 function fetcher(params: Object): Object {
-  return fetch(
-    "https://serve.onegraph.com/dynamic?app_id=c333eb5b-04b2-4709-9246-31e18db397e1",
-    {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(params)
-    }
-  )
-    .then(function(response) {
-      return response.text();
-    })
-    .then(function(responseBody) {
-      try {
-        return JSON.parse(responseBody);
-      } catch (e) {
-        return responseBody;
-      }
-    });
+  return Promise.resolve(data)
+  // return fetch(
+  //   "https://serve.onegraph.com/dynamic?app_id=c333eb5b-04b2-4709-9246-31e18db397e1",
+  //   {
+  //     method: "POST",
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json"
+  //     },
+  //     body: JSON.stringify(params)
+  //   }
+  // )
+  //   .then(function(response) {
+  //     return response.text();
+  //   })
+  //   .then(function(responseBody) {
+  //     try {
+  //       return JSON.parse(responseBody);
+  //     } catch (e) {
+  //       return responseBody;
+  //     }
+  //   });
 }
 
 const DEFAULT_QUERY = `# shift-option/alt-click on a query below to jump to it in the explorer
