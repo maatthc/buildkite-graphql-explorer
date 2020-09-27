@@ -8,7 +8,7 @@ import type {
     GraphQLScalarType,
     ValueNode,
 } from 'graphql'
-const GraphiQLExplorer = require('graphiql-explorer')
+import GraphiQLExplorer from 'graphiql-explorer'
 
 function unwrapOutputType(outputType: GraphQLOutputType) {
     let unwrappedType = outputType
