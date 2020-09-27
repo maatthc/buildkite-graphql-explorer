@@ -7,7 +7,6 @@ import { makeDefaultArg, getDefaultScalarArgValue } from './CustomArgs'
 import 'graphiql/graphiql.css'
 import './App.css'
 import data from './buildkite.json'
-// const GraphiQLExplorer = require('graphiql-explorer')
 import GraphiQLExplorer from 'graphiql-explorer'
 
 interface Data {
@@ -16,70 +15,43 @@ interface Data {
 
 function fetcher(params: any): Promise<Data> {
     console.log(params)
-    return Promise.resolve((data as unknown) as Data)
+    return Promise.resolve((data as unknown) as Data) // Point it to the BuildKite API?
     // return fetch(
-    //   "https://serve.onegraph.com/dynamic?app_id=c333eb5b-04b2-4709-9246-31e18db397e1",
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json"
-    //     },
-    //     body: JSON.stringify(params)
-    //   }
-    // )
-    //   .then(function(response) {
-    //     return response.text();
-    //   })
-    //   .then(function(responseBody) {
-    //     try {
-    //       return JSON.parse(responseBody);
-    //     } catch (e) {
-    //       return responseBody;
+    //     'https://serve.onegraph.com/dynamic?app_id=c333eb5b-04b2-4709-9246-31e18db397e1',
+    //     {
+    //         method: 'POST',
+    //         headers: {
+    //             Accept: 'application/json',
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(params),
     //     }
-    //   });
+    // )
+    //     .then(function (response) {
+    //         return response.text()
+    //     })
+    //     .then(function (responseBody) {
+    //         try {
+    //             return JSON.parse(responseBody)
+    //         } catch (e) {
+    //             return responseBody
+    //         }
+    //     })
 }
 
 const DEFAULT_QUERY = `# shift-option/alt-click on a query below to jump to it in the explorer
 # option/alt-click on a field in the explorer to select all subfields
-query npmPackage {
-  npm {
-    package(name: "onegraph-apollo-client") {
-      name
-      homepage
-      downloads {
-        lastMonth {
-          count
+query OrganizationTeams {
+    organization(slug: "") {
+      teams {
+        edges {
+          node {
+            name
+          }
         }
       }
     }
-  }
-}
-
-query graphQLPackage {
-  npm {
-    package(name: "graphql") {
-      name
-      homepage
-      downloads {
-        lastMonth {
-          count
-        }
-      }
-    }
-  }
-}
-
-fragment bundlephobiaInfo on BundlephobiaDependencyInfo {
-  name
-  size
-  version
-  history {
-    dependencyCount
-    size
-    gzip
-  }
-}`
+  }`
 
 type State = {
     schema?: GraphQLSchema
@@ -89,7 +61,7 @@ type State = {
 
 class App extends Component {
     private _graphiql: GraphiQL
-    graphiqlState: State = { query: DEFAULT_QUERY, explorerIsOpen: true }
+    state: State = { query: DEFAULT_QUERY, explorerIsOpen: true }
 
     constructor(props: any) {
         super(props)
@@ -101,14 +73,10 @@ class App extends Component {
             query: getIntrospectionQuery(),
         }).then((result) => {
             const editor = this._graphiql.getQueryEditor()
-            console.log(this._graphiql)
-            console.log(editor)
-
             editor.setOption('extraKeys', {
                 ...(editor.options.extraKeys || {}),
                 'Shift-Alt-LeftClick': this._handleInspectOperation,
             })
-
             this.setState({ schema: buildClientSchema(result.data) })
         })
     }
@@ -117,7 +85,7 @@ class App extends Component {
         cm: any,
         mousePos: { line: number; ch: number }
     ) => {
-        const parsedQuery = parse(this.graphiqlState.query || '')
+        const parsedQuery = parse(this.state.query || '')
 
         if (!parsedQuery) {
             console.error("Couldn't parse query document")
@@ -177,12 +145,12 @@ class App extends Component {
     }
 
     _handleToggleExplorer = (): void => {
-        this.setState({ explorerIsOpen: !this.graphiqlState.explorerIsOpen })
+        this.setState({ explorerIsOpen: !this.state.explorerIsOpen })
     }
 
     render(): any {
-        const { query, schema } = this.graphiqlState
-        console.log('Running Render')
+        const { query, schema } = this.state
+        console.log(schema)
 
         const result = (
             <div className="graphiql-container">
@@ -193,7 +161,7 @@ class App extends Component {
                     onRunOperation={(operationName: any) =>
                         this._graphiql.handleRunQuery(operationName)
                     }
-                    explorerIsOpen={this.graphiqlState.explorerIsOpen}
+                    explorerIsOpen={this.state.explorerIsOpen}
                     onToggleExplorer={this._handleToggleExplorer}
                     getDefaultScalarArgValue={getDefaultScalarArgValue}
                     makeDefaultArg={makeDefaultArg}
@@ -225,8 +193,6 @@ class App extends Component {
                 </GraphiQL>
             </div>
         )
-        console.log(result)
-
         return result
     }
 }
