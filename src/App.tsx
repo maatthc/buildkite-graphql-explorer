@@ -6,44 +6,43 @@ import type { GraphQLSchema } from 'graphql'
 import { makeDefaultArg, getDefaultScalarArgValue } from './CustomArgs'
 import 'graphiql/graphiql.css'
 import './App.css'
-import data from './buildkite.json'
 import GraphiQLExplorer from 'graphiql-explorer'
+
+const endPoint = 'https://graphql.buildkite.com/v1'
+const token = ''
 
 interface Data {
     data: IntrospectionQuery
 }
 
 function fetcher(params: any): Promise<Data> {
-    console.log(params)
-    return Promise.resolve((data as unknown) as Data) // Point it to the BuildKite API?
-    // return fetch(
-    //     'https://serve.onegraph.com/dynamic?app_id=c333eb5b-04b2-4709-9246-31e18db397e1',
-    //     {
-    //         method: 'POST',
-    //         headers: {
-    //             Accept: 'application/json',
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(params),
-    //     }
-    // )
-    //     .then(function (response) {
-    //         return response.text()
-    //     })
-    //     .then(function (responseBody) {
-    //         try {
-    //             return JSON.parse(responseBody)
-    //         } catch (e) {
-    //             return responseBody
-    //         }
-    //     })
+    return fetch(endPoint, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(params),
+    })
+        .then(function (response) {
+            return response.text()
+        })
+        .then(function (responseBody) {
+            try {
+                return JSON.parse(responseBody)
+            } catch (e) {
+                return responseBody
+            }
+        })
 }
 
 const DEFAULT_QUERY = `# shift-option/alt-click on a query below to jump to it in the explorer
 # option/alt-click on a field in the explorer to select all subfields
-query OrganizationTeams {
+query MyQuery {
     organization(slug: "") {
-      teams {
+      name
+      teams(first: 10) {
         edges {
           node {
             name
