@@ -192,10 +192,6 @@ class App extends Component {
         const { query, schema } = this.state
         const result = (
             <div className="graphiql-container">
-                <Button variant="primary" onClick={this.handleShow}>
-                    Launch demo modal
-                </Button>
-
                 <Modal
                     show={this.state.show}
                     onHide={this.handleSave}
