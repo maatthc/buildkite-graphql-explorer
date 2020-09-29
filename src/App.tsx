@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import GraphiQL from 'graphiql'
-import { IntrospectionQuery } from 'graphql'
+// import { IntrospectionQuery } from 'graphql'
 import { buildClientSchema, getIntrospectionQuery, parse } from 'graphql'
 import type { GraphQLSchema } from 'graphql'
 import GraphiQLExplorer from 'graphiql-explorer'
-import { Modal, Button } from 'react-bootstrap'
+import { Modal, Button, InputGroup, FormControl } from 'react-bootstrap'
 
 import { makeDefaultArg, getDefaultScalarArgValue } from './CustomArgs'
 
@@ -13,13 +13,10 @@ import 'graphiql/graphiql.css'
 import './App.css'
 
 const endPoint = 'https://graphql.buildkite.com/v1'
-const token = ''
+let token: string
 
-interface Data {
-    data: IntrospectionQuery
-}
-
-function fetcher(params: any): Promise<Data> {
+function fetcher(params: any) {
+    if (!token) return Promise.resolve()
     return fetch(endPoint, {
         method: 'POST',
         headers: {
@@ -61,39 +58,67 @@ type State = {
     query: string
     explorerIsOpen: boolean
     show: boolean
+    token: string
 }
 
 class App extends Component {
     private _graphiql: GraphiQL
-    state: State = { query: DEFAULT_QUERY, explorerIsOpen: true, show: false }
+    state: State = {
+        query: DEFAULT_QUERY,
+        explorerIsOpen: true,
+        show: false,
+        token: '',
+    }
 
     constructor(props: any) {
         super(props)
         this._graphiql = new GraphiQL({ fetcher })
         this.handleShow = this.handleShow.bind(this)
-        this.handleClose = this.handleClose.bind(this)
+        this.handleSave = this.handleSave.bind(this)
+        this.handleExit = this.handleExit.bind(this)
     }
 
-    handleClose() {
+    handleSave(): void {
+        if (this.state.token.length < 40) return
+        token = this.state.token
         this.setState({ show: false })
+        this.updateSchema()
     }
 
-    handleShow() {
+    handleShow(): void {
         this.setState({ show: true })
     }
 
-    componentDidMount(): void {
-        fetcher({
-            query: getIntrospectionQuery(),
-        }).then((result) => {
-            const editor = this._graphiql.getQueryEditor()
-            editor.setOption('extraKeys', {
-                ...(editor.options.extraKeys || {}),
-                'Shift-Alt-LeftClick': this._handleInspectOperation,
-            })
-            if (result.data)
-                this.setState({ schema: buildClientSchema(result.data) })
+    handleExit(): void {
+        this.handleSave()
+    }
+
+    onChange(event): void {
+        // Intended to run on the change of every form component
+        event.preventDefault()
+        this.setState({
+            [event.target.name]: event.target.value,
         })
+    }
+
+    updateSchema(): void {
+        if (token)
+            fetcher({
+                query: getIntrospectionQuery(),
+            }).then((result) => {
+                const editor = this._graphiql.getQueryEditor()
+                editor.setOption('extraKeys', {
+                    ...(editor.options.extraKeys || {}),
+                    'Shift-Alt-LeftClick': this._handleInspectOperation,
+                })
+                if (result.data)
+                    this.setState({ schema: buildClientSchema(result.data) })
+            })
+    }
+
+    componentDidMount(): void {
+        if (!token) this.handleShow()
+        else this.updateSchema()
     }
 
     _handleInspectOperation = (
@@ -165,25 +190,36 @@ class App extends Component {
 
     render(): any {
         const { query, schema } = this.state
-
         const result = (
             <div className="graphiql-container">
                 <Button variant="primary" onClick={this.handleShow}>
                     Launch demo modal
                 </Button>
 
-                <Modal show={this.state.show} onHide={this.handleClose}>
+                <Modal
+                    show={this.state.show}
+                    onHide={this.handleSave}
+                    onExit={this.handleExit}
+                    backdrop="static"
+                    keyboard={false}
+                    centered
+                >
                     <Modal.Header closeButton>
-                        <Modal.Title>Modal heading</Modal.Title>
+                        <Modal.Title>Configuration</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        Woohoo, you are reading this text in a modal!
+                        <InputGroup className="mb-3">
+                            <FormControl
+                                name="token"
+                                placeholder="Enter BuildKite API Access Token"
+                                aria-label="Enter 6BuildKite API Access Token"
+                                aria-describedby="basic-addon2"
+                                onChange={this.onChange.bind(this)}
+                            />
+                        </InputGroup>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={this.handleClose}>
-                            Close
-                        </Button>
-                        <Button variant="primary" onClick={this.handleClose}>
+                        <Button variant="primary" onClick={this.handleSave}>
                             Save Changes
                         </Button>
                     </Modal.Footer>
