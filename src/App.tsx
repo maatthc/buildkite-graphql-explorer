@@ -3,12 +3,14 @@ import GraphiQL from 'graphiql'
 import { IntrospectionQuery } from 'graphql'
 import { buildClientSchema, getIntrospectionQuery, parse } from 'graphql'
 import type { GraphQLSchema } from 'graphql'
+import GraphiQLExplorer from 'graphiql-explorer'
+import { Modal, Button } from 'react-bootstrap'
+
 import { makeDefaultArg, getDefaultScalarArgValue } from './CustomArgs'
+
+import 'bootstrap/dist/css/bootstrap.min.css'
 import 'graphiql/graphiql.css'
 import './App.css'
-import GraphiQLExplorer from 'graphiql-explorer'
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
 
 const endPoint = 'https://graphql.buildkite.com/v1'
 const token = ''
@@ -166,6 +168,26 @@ class App extends Component {
 
         const result = (
             <div className="graphiql-container">
+                <Button variant="primary" onClick={this.handleShow}>
+                    Launch demo modal
+                </Button>
+
+                <Modal show={this.state.show} onHide={this.handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Modal heading</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        Woohoo, you are reading this text in a modal!
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={this.handleClose}>
+                            Close
+                        </Button>
+                        <Button variant="primary" onClick={this.handleClose}>
+                            Save Changes
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
                 <GraphiQLExplorer
                     schema={schema}
                     query={query}
@@ -203,26 +225,6 @@ class App extends Component {
                         />
                     </GraphiQL.Toolbar>
                 </GraphiQL>
-                <Button variant="primary" onClick={this.handleShow}>
-                    Launch demo modal
-                </Button>
-
-                <Modal show={this.state.show} onHide={this.handleClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Modal heading</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        Woohoo, you are reading this text in a modal!
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={this.handleClose}>
-                            Close
-                        </Button>
-                        <Button variant="primary" onClick={this.handleClose}>
-                            Save Changes
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
             </div>
         )
         return result
