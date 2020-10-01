@@ -1,6 +1,6 @@
 {
-  "name": "graphiql-explorer-example",
-  "homepage": "https://onegraph.github.io/graphiql-explorer-example",
+  "name": "buildkite-graphql-explorer",
+  "homepage": "https://github.com/maatthc/buildkite-graphql-explorer",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
