@@ -16,7 +16,7 @@ const endPoint = 'https://graphql.buildkite.com/v1'
 let token: string
 
 function fetcher(params: any) {
-    if (!token) return Promise.resolve()
+    if (!token) return Promise.resolve('')
     return fetch(endPoint, {
         method: 'POST',
         headers: {
@@ -216,7 +216,7 @@ class App extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" onClick={this.handleSave}>
-                            Save Changes
+                            Continue
                         </Button>
                     </Modal.Footer>
                 </Modal>
@@ -237,6 +237,7 @@ class App extends Component {
                     fetcher={fetcher}
                     schema={schema}
                     query={query}
+                    response="No results yet.."
                     onEditQuery={this._handleEditQuery}
                 >
                     <GraphiQL.Toolbar>
