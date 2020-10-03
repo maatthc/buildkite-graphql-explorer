@@ -1,6 +1,6 @@
 {
   "name": "buildkite-graphql-explorer",
-  "homepage": "/buildkite-graphql-explorer",
+  "homepage": "https://maatthc.github.io/buildkite-graphql-explorer",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
