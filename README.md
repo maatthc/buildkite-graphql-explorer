@@ -1,7 +1,8 @@
 # BuildKite GraphQL Explorer
 
+Building GraphQL queries for Buildkite can be difficult -  this tools aim to help you visualize the available relationships between types.
 
-Based on [GraphiQL explorer](https://github.com/OneGraph/graphiql-explorer).
+Online demo available here: https://maatthc.github.io/buildkite-graphql-explorer/
 
 ## Setup
 
@@ -18,7 +19,6 @@ yarn start
 ```
 
 ## TODO
- -  Fix initial error when Token is not yet provided
  -  Add message about security of provided Token
  -  Implement a loading animation
  -  Add a button to change the provided Token
@@ -26,3 +26,7 @@ yarn start
  -  Add proper TypeScript types
  -  Add tests
  -  Update this documentation
+
+## References
+
+Based on [GraphiQL explorer](https://github.com/OneGraph/graphiql-explorer).
