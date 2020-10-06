@@ -73,7 +73,7 @@ class App extends Component {
     constructor(props: any) {
         super(props)
         this._graphiql = new GraphiQL({ fetcher })
-        this.handleShow = this.handleShow.bind(this)
+        this.handleShowConfig = this.handleShowConfig.bind(this)
         this.handleSave = this.handleSave.bind(this)
         this.handleExit = this.handleExit.bind(this)
     }
@@ -85,7 +85,7 @@ class App extends Component {
         this.updateSchema()
     }
 
-    handleShow(): void {
+    handleShowConfig(): void {
         this.setState({ show: true })
     }
 
@@ -117,7 +117,7 @@ class App extends Component {
     }
 
     componentDidMount(): void {
-        if (!token) this.handleShow()
+        if (!token) this.handleShowConfig()
         else this.updateSchema()
     }
 
@@ -210,6 +210,7 @@ class App extends Component {
                                 placeholder="Enter BuildKite API Access Token"
                                 aria-label="Enter 6BuildKite API Access Token"
                                 aria-describedby="basic-addon2"
+                                value={this.state.token}
                                 onChange={this.onChange.bind(this)}
                             />
                         </InputGroup>
@@ -261,6 +262,11 @@ class App extends Component {
                             onClick={this._handleToggleExplorer}
                             label="Explorer"
                             title="Toggle Explorer"
+                        />
+                        <GraphiQL.Button
+                            onClick={this.handleShowConfig}
+                            label="Configuration"
+                            title="Change Configuration"
                         />
                     </GraphiQL.Toolbar>
                 </GraphiQL>
