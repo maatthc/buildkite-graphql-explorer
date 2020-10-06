@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a6790db5efe57ed3a21e08f7e71eace1",
+    "revision": "fd2eab08be04164b0e88130c2594db1a",
     "url": "/buildkite-graphql-explorer/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/buildkite-graphql-explorer/static/css/2.0b090508.chunk.css"
   },
   {
-    "revision": "11e0a9ad3bc53019e329",
-    "url": "/buildkite-graphql-explorer/static/css/main.c0d30e98.chunk.css"
+    "revision": "ed3be78eea5c7f5931c3",
+    "url": "/buildkite-graphql-explorer/static/css/main.fe4184a2.chunk.css"
   },
   {
     "revision": "6958651bcf6eb9bc64d9",
@@ -20,7 +20,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/buildkite-graphql-explorer/static/js/2.e8820673.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "11e0a9ad3bc53019e329",
+    "revision": "ed3be78eea5c7f5931c3",
     "url": "/buildkite-graphql-explorer/static/js/main.260c1858.chunk.js"
   },
   {
