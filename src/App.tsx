@@ -213,6 +213,12 @@ class App extends Component {
                                 onChange={this.onChange.bind(this)}
                             />
                         </InputGroup>
+                        <p className="text-muted">
+                            <small>
+                                Your token will be only shared with the GraphQL
+                                endpoint.
+                            </small>
+                        </p>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" onClick={this.handleSave}>
