@@ -20,10 +20,10 @@ yarn start
 
 ## TODO
  -  Implement a loading animation
- -  Fix Explorer dimensions
  -  Add proper TypeScript types
  -  Add tests
- -  Update this documentation
+ -  Add GitHub Actions linter
+ -  Update this documentation (always)
 
 ## References
 
