@@ -19,7 +19,6 @@ yarn start
 ```
 
 ## TODO
- -  Add message about security of provided Token
  -  Implement a loading animation
  -  Add a button to change the provided Token
  -  Fix Explorer dimensions
@@ -29,4 +28,4 @@ yarn start
 
 ## References
 
-Based on [GraphiQL explorer](https://github.com/OneGraph/graphiql-explorer).
+Based on [GraphiQL explorer](https://github.com/OneGraph/graphiql-explorer).****
