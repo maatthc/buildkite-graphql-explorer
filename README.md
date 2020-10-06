@@ -20,7 +20,6 @@ yarn start
 
 ## TODO
  -  Implement a loading animation
- -  Add a button to change the provided Token
  -  Fix Explorer dimensions
  -  Add proper TypeScript types
  -  Add tests
