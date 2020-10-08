@@ -12,7 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'graphiql/graphiql.css'
 import './App.css'
 
-const endPoint = 'https://graphql.buildkite.com/v1'
+let endPoint: string
 let token: string
 
 function fetcher(params: any) {
@@ -59,6 +59,7 @@ type State = {
     explorerIsOpen: boolean
     show: boolean
     token: string
+    endPoint: string
 }
 
 class App extends Component {
@@ -68,6 +69,7 @@ class App extends Component {
         explorerIsOpen: true,
         show: false,
         token: '',
+        endPoint: 'https://graphql.buildkite.com/v1',
     }
 
     constructor(props: any) {
@@ -81,6 +83,7 @@ class App extends Component {
     handleSave(): void {
         if (this.state.token.length < 40) return
         token = this.state.token
+        endPoint = this.state.endPoint
         this.setState({ show: false })
         this.updateSchema()
     }
@@ -204,6 +207,17 @@ class App extends Component {
                         <Modal.Title>Configuration</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
+                        <InputGroup className="mb-3">
+                            <FormControl
+                                name="endpoint"
+                                placeholder="Enter BuildKite API Endpoint"
+                                aria-label="Enter BuildKite API Endpoint"
+                                aria-describedby="basic-addon2"
+                                value={this.state.endPoint}
+                                onChange={this.onChange.bind(this)}
+                            />
+                        </InputGroup>
+                        <br />
                         <InputGroup className="mb-3">
                             <FormControl
                                 name="token"
