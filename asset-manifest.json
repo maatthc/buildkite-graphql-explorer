@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/buildkite-graphql-explorer/static/css/main.fe4184a2.chunk.css",
-    "main.js": "/buildkite-graphql-explorer/static/js/main.260c1858.chunk.js",
-    "main.js.map": "/buildkite-graphql-explorer/static/js/main.260c1858.chunk.js.map",
+    "main.js": "/buildkite-graphql-explorer/static/js/main.96656ce9.chunk.js",
+    "main.js.map": "/buildkite-graphql-explorer/static/js/main.96656ce9.chunk.js.map",
     "runtime-main.js": "/buildkite-graphql-explorer/static/js/runtime-main.c9297b02.js",
     "runtime-main.js.map": "/buildkite-graphql-explorer/static/js/runtime-main.c9297b02.js.map",
     "static/css/2.0b090508.chunk.css": "/buildkite-graphql-explorer/static/css/2.0b090508.chunk.css",
     "static/js/2.e8820673.chunk.js": "/buildkite-graphql-explorer/static/js/2.e8820673.chunk.js",
     "static/js/2.e8820673.chunk.js.map": "/buildkite-graphql-explorer/static/js/2.e8820673.chunk.js.map",
     "index.html": "/buildkite-graphql-explorer/index.html",
-    "precache-manifest.aab6c3092cefe6df5d6df2136c067ce2.js": "/buildkite-graphql-explorer/precache-manifest.aab6c3092cefe6df5d6df2136c067ce2.js",
+    "precache-manifest.9fea0a1b2e213a4d55c68b8eac47455b.js": "/buildkite-graphql-explorer/precache-manifest.9fea0a1b2e213a4d55c68b8eac47455b.js",
     "service-worker.js": "/buildkite-graphql-explorer/service-worker.js",
     "static/css/2.0b090508.chunk.css.map": "/buildkite-graphql-explorer/static/css/2.0b090508.chunk.css.map",
     "static/css/main.fe4184a2.chunk.css.map": "/buildkite-graphql-explorer/static/css/main.fe4184a2.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.0b090508.chunk.css",
     "static/js/2.e8820673.chunk.js",
     "static/css/main.fe4184a2.chunk.css",
-    "static/js/main.260c1858.chunk.js"
+    "static/js/main.96656ce9.chunk.js"
   ]
 }
