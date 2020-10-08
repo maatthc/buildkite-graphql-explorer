@@ -208,7 +208,7 @@ class App extends Component {
                             <FormControl
                                 name="token"
                                 placeholder="Enter BuildKite API Access Token"
-                                aria-label="Enter 6BuildKite API Access Token"
+                                aria-label="Enter BuildKite API Access Token"
                                 aria-describedby="basic-addon2"
                                 value={this.state.token}
                                 onChange={this.onChange.bind(this)}
