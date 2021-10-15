@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/buildkite-graphql-explorer/precache-manifest.65060886e516e1cfd2eee892c3165f5b.js"
+  "/buildkite-graphql-explorer/precache-manifest.79105723184b4b68d94b3e428549104c.js"
 );
 
 self.addEventListener('message', (event) => {
