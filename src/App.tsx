@@ -81,7 +81,10 @@ class App extends Component {
     }
 
     handleSave(): void {
-        if (this.state.token.length < 40) return
+        if (this.state.token.length < 30) {
+            console.log('Token seems to be incorrect!')
+            return
+        }
         token = this.state.token
         endPoint = this.state.endPoint
         this.setState({ show: false })
